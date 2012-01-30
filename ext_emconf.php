@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
 	'author_company' => 'Marketing Factory Consulting GmbH',
-	'version' => '1.0.1',
+	'version' => '1.1.0',
 	'constraints' => array(
 		'depends' => array(
 		),
