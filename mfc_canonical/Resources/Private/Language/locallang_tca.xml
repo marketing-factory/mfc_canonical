@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for modul labels belonging to extension 'mfc_canonical'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="pages.tx_mfccanonical_canonical">Canonical override</label>
+		</languageKey>
+		<languageKey index="default" type="array">
+			<label index="pages.tx_mfccanonical_canonical">Überschreiben des Canonical</label>
+		</languageKey>
+	</data>
+</T3locallang>
