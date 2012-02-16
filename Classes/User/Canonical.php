@@ -60,7 +60,7 @@ class tx_MfcCanonical_User_Canonical {
 
 			/** @var $pageRenderer t3lib_pageRenderer */
 			$pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
-			$pageRenderer->addMetaTag('<meta type="canonical" href="' . $host . $path . '"/>');
+			$pageRenderer->addMetaTag('<link rel="canonical" href="' . $host . $path . '"/>');
 		}
 	}
 
