@@ -2,6 +2,8 @@
 {$mfc_canonical.page}.{$mfc_canonical.object} {
 	userFunc = tx_MfcCanonical_User_Canonical->render
 
+	host =
+
 	# path is always used as a TEXT content element
 	path.typolink {
 		parameter = {page:uid}

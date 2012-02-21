@@ -2,7 +2,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2011 Sebastian Fischer <sf@marketing-factory.de>
+ *  (c) 2011-12 Sebastian Fischer <sf@marketing-factory.de>
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -70,7 +70,12 @@ class tx_MfcCanonical_User_Canonical {
 	 * @return string
 	 */
 	protected function getHost() {
-		return $GLOBALS['TSFE']->baseUrl ? $GLOBALS['TSFE']->baseUrl : 'http://' . $_SERVER['HTTP_HOST'];
+		if (isset($this->conf['host']) && !empty($this->conf['host'])) {
+			$host = $this->conf['host'];
+		} else {
+			$host = $GLOBALS['TSFE']->baseUrl ? $GLOBALS['TSFE']->baseUrl : 'http://' . $_SERVER['HTTP_HOST'];
+		}
+		return $host;
 	}
 
 	/**
