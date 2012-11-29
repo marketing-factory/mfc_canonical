@@ -27,7 +27,7 @@
  *
  * @author Sebastian Fischer <sf@marketing-factory.de>
  */
-class tx_MfcCanonical_User_Canonical {
+class Tx_MfcCanonical_User_Canonical {
 	/**
 	 * @var array
 	 */
@@ -42,26 +42,38 @@ class tx_MfcCanonical_User_Canonical {
 	public function render($content, $conf) {
 		$this->conf = $conf;
 
-		$host = $this->getHost();
+		$host = $this->getHost($content, $this->conf);
 		if (!empty($host)) {
-			$path = $this->getPath();
-
-				// prevent double slashes if http://www.example.com/ /index.html are given
-			if (substr($host, -1) == '/' && substr($path, 0, 1) == '/') {
-				$host = substr($host, 0, -1);
-				// add slash if http://www.example.com index.html are given
-			} elseif (!empty($host) && substr($host, -1) != '/' && substr($path, 0, 1) != '/') {
-				$host .= '/';
-			}
-
-			if (strpos($path, 'http://') !== FALSE || strpos($path, 'https://') !== FALSE) {
-				$host = '';
-			}
-
 			/** @var $pageRenderer t3lib_pageRenderer */
 			$pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
-			$pageRenderer->addMetaTag('<link rel="canonical" href="' . $host . $path . '"/>');
+			$pageRenderer->addMetaTag('<link rel="canonical" href="' . $this->getUrl($content, $conf) . '"/>');
 		}
+	}
+
+	/**
+	 * @param string $content
+	 * @param array $conf
+	 * @return string
+	 */
+	public function getUrl($content, $conf) {
+		$this->conf = $this->conf ? $this->conf : $conf;
+
+		$host = $this->getHost($content, $this->conf);
+		$path = $this->getPath();
+
+			// prevent double slashes if http://www.example.com/ /index.html are given
+		if (substr($host, -1) == '/' && substr($path, 0, 1) == '/') {
+			$host = substr($host, 0, -1);
+			// add slash if http://www.example.com index.html are given
+		} elseif (!empty($host) && substr($host, -1) != '/' && substr($path, 0, 1) != '/') {
+			$host .= '/';
+		}
+
+		if (strpos($path, 'http://') !== FALSE || strpos($path, 'https://') !== FALSE) {
+			$host = '';
+		}
+
+		return $host . $path;
 	}
 
 	/**
@@ -69,7 +81,9 @@ class tx_MfcCanonical_User_Canonical {
 	 *
 	 * @return string
 	 */
-	protected function getHost() {
+	public function getHost($content, $conf) {
+		$this->conf = $this->conf ? $this->conf : $conf;
+
 		if (isset($this->conf['host']) && !empty($this->conf['host'])) {
 			$host = $this->conf['host'];
 		} else {

@@ -1,18 +1,18 @@
 {$mfc_canonical.page}.{$mfc_canonical.object} = USER
 {$mfc_canonical.page}.{$mfc_canonical.object} {
-	userFunc = tx_MfcCanonical_User_Canonical->render
+	userFunc = Tx_MfcCanonical_User_Canonical->render
 
 	host =
 
 	# path is always used as a TEXT content element
 	path.typolink {
-		parameter = {page:uid}
-		parameter.insertData = 1
+		parameter.field = uid
+
 		useCacheHash = 1
 
 		addQueryString = 1
 		addQueryString.method = GET
-		addQueryString.exclude = L,id,cHash,no_cache
+		addQueryString.exclude = L,id,cHash,no_cache,tx_ttnews%5BbackPid%5D
 
 		returnLast = url
 	}
