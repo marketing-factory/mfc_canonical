@@ -78,7 +78,8 @@ class Tx_MfcCanonical_User_Canonical {
 
 	/**
 	 * Get the host part of the canonical tag either by base url or by http host
-	 *
+	 * @param string $content
+	 * @param array $conf
 	 * @return string
 	 */
 	public function getHost($content, $conf) {

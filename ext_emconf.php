@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Build a canonical tag depending on configuration',
 	'category' => 'Marketing Factory',
 	'shy' => 0,
-	'version' => '1.3.0',
+	'version' => '1.4.0',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
@@ -34,6 +34,8 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
+			'php' => '5.3.0-5.3.99',
+			'typo3' => '4.5-4.5.99',
 		),
 		'conflicts' => array(
 		),

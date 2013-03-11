@@ -6,7 +6,7 @@ if (!defined('TYPO3_MODE')) {
 
 $tempColumns = array(
 	'tx_mfccanonical_canonical' => Array (
-		'exclude' => 0,
+		'exclude' => 1,
 		'label' => 'LLL:EXT:mfc_canonical/Resources/Private/Language/locallang_tca.xml:pages.tx_mfccanonical_canonical',
 		'config' => Array (
 			'type' => 'input',
