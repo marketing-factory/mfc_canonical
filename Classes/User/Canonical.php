@@ -90,6 +90,8 @@ class Tx_MfcCanonical_User_Canonical {
 		} else {
 			$host = $GLOBALS['TSFE']->baseUrl ? $GLOBALS['TSFE']->baseUrl : 'http://' . $_SERVER['HTTP_HOST'];
 		}
+
+		$host = rtrim($host,'/').'/';
 		return $host;
 	}
 
