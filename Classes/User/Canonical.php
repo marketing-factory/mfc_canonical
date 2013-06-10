@@ -45,6 +45,7 @@ class Tx_MfcCanonical_User_Canonical {
 		$host = $this->getHost($content, $this->conf);
 		if (!empty($host)) {
 			/** @var $pageRenderer t3lib_pageRenderer */
+			/** @noinspection PhpUndefinedMethodInspection */
 			$pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
 			$pageRenderer->addMetaTag('<link rel="canonical" href="' . $this->getUrl($content, $conf) . '"/>');
 		}
@@ -91,8 +92,8 @@ class Tx_MfcCanonical_User_Canonical {
 			$host = $GLOBALS['TSFE']->baseUrl ? $GLOBALS['TSFE']->baseUrl : 'http://' . $_SERVER['HTTP_HOST'];
 		}
 
-		$host = rtrim($host,'/').'/';
-		return $host;
+		$content .= rtrim($host, '/') . '/';
+		return $content;
 	}
 
 	/**

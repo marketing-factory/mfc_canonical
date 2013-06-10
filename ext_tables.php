@@ -19,6 +19,11 @@ t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages', $tempColumns, 1);
 t3lib_extMgm::addToAllTCAtypes('pages', 'tx_mfccanonical_canonical', '', 'after:nav_title');
 
+t3lib_div::loadTCA('pages_language_overlay');
+t3lib_extMgm::addTCAcolumns('pages_language_overlay', $tempColumns, 1);
+t3lib_extMgm::addToAllTCAtypes('pages_language_overlay', 'tx_mfccanonical_canonical', '', 'after:nav_title');
+
+/** @noinspection PhpUndefinedVariableInspection */
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript/', 'Canonical');
 
 ?>
