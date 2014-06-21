@@ -3,7 +3,7 @@
 /***************************************************************
  * Extension Manager/Repository config file for ext "mfc_canonical".
  *
- * Auto generated 10-06-2013 12:41
+ * Auto generated 21-06-2014 15:48
  *
  * Manual updates:
  * Only the data in the array - everything else is removed by next
@@ -15,7 +15,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'description' => 'Build a canonical tag depending on configuration',
 	'category' => 'Marketing Factory',
 	'shy' => 0,
-	'version' => '1.5.0',
+	'version' => '2.0.0',
 	'dependencies' => '',
 	'conflicts' => '',
 	'priority' => '',
@@ -34,8 +34,8 @@ $EM_CONF[$_EXTKEY] = array(
 	'CGLcompliance_note' => '',
 	'constraints' => array(
 		'depends' => array(
-			'php' => '5.3.0-5.3.99',
-			'typo3' => '4.5-4.5.99',
+			'php' => '5.3.0-5.5.99',
+			'typo3' => '4.5.0-6.2.99',
 		),
 		'conflicts' => array(
 		),
