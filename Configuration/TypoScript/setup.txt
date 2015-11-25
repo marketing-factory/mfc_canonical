@@ -1,6 +1,6 @@
 {$mfc_canonical.page}.{$mfc_canonical.object} = USER
 {$mfc_canonical.page}.{$mfc_canonical.object} {
-	userFunc = Tx_MfcCanonical_User_Canonical->render
+	userFunc = Mfc\MfcCanonical\User\Canonical->render
 
 	host =
 

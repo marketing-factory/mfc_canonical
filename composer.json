@@ -1,0 +1,19 @@
+{
+  "name": "mfc/mfc-canonical",
+  "description": "Build a canonical tag depending on configuration",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Alexander Schnitzler",
+      "email": "typo3@alexanderschnitzler.de"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mfc\\MfcCanonical\\": "Classes/"
+    }
+  }
+}
