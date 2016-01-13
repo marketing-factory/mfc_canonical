@@ -23,9 +23,9 @@ call_user_func(function () {
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
         'pages_language_overlay',
-        'tx_mfccanonical_canonical',
-        '',
-        'after:nav_title'
+        'title',
+        '--linebreak--, tx_mfccanonical_canonical',
+        'after:subtitle'
     );
 
 });
