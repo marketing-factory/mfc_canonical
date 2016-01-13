@@ -1,0 +1,5 @@
+# This it the name of the used PAGE object (example page, pagina, seite)
+mfc_canonical.page = page
+
+# This defines the load order of the userFunc in the PAGE.headerData
+mfc_canonical.object = 1337
