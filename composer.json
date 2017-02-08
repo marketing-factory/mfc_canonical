@@ -2,6 +2,7 @@
   "name": "mfc/mfc-canonical",
   "description": "Build a canonical tag depending on configuration",
   "license": "proprietary",
+  "type": "typo3-cms-extension",
   "authors": [
     {
       "name": "Alexander Schnitzler",
