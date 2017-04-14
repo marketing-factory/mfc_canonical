@@ -1,11 +1,12 @@
 {
   "name": "mfc/mfc-canonical",
+  "type": "typo3-cms-extension",
   "description": "Build a canonical tag depending on configuration",
-  "license": "proprietary",
+  "license": ["GPL-2.0+"],
   "authors": [
     {
       "name": "Alexander Schnitzler",
-      "email": "typo3@alexanderschnitzler.de"
+      "email": "typo3@marketing-factory.de"
     }
   ],
   "require": {
