@@ -31,7 +31,7 @@ class Canonical
     /**
      * @var array
      */
-    protected $conf = array();
+    protected $conf = [];
 
     /**
      * @var PageRenderer
@@ -43,11 +43,13 @@ class Canonical
      *
      * @param string $content
      * @param array $conf
+     *
+     * @return void
      */
     public function render($content, $conf)
     {
         $this->conf = $conf;
-        $this->pageRenderer = GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Page\\PageRenderer');
+        $this->pageRenderer = GeneralUtility::makeInstance(\TYPO3\CMS\Core\Page\PageRenderer::class);
 
         $host = $this->getHost($content, $this->conf);
         if (!empty($host)) {
@@ -63,23 +65,21 @@ class Canonical
      */
     public function getUrl($content, $conf)
     {
-        $this->conf = $this->conf ?
-            $this->conf :
-            $conf;
+        $this->conf = $this->conf ? $this->conf : $conf;
 
-        $host = $this->getHost($content, $this->conf);
+        $host = '';
         $path = $this->getPath();
 
-        // prevent double slashes if http://www.example.com/ /index.html are given
-        if (substr($host, -1) == '/' && substr($path, 0, 1) == '/') {
-            $host = substr($host, 0, -1);
-            // add slash if http://www.example.com index.html are given
-        } elseif (!empty($host) && substr($host, -1) != '/' && substr($path, 0, 1) != '/') {
-            $host .= '/';
-        }
+        if (strpos($path, 'http://') === false && strpos($path, 'https://') === false) {
+            $host = $this->getHost($content, $this->conf);
 
-        if (strpos($path, 'http://') !== false || strpos($path, 'https://') !== false) {
-            $host = '';
+            // prevent double slashes if http://www.example.com/ /index.html are given
+            if (substr($host, -1) == '/' && substr($path, 0, 1) == '/') {
+                $host = substr($host, 0, -1);
+                // add slash if http://www.example.com index.html are given
+            } elseif (!empty($host) && substr($host, -1) != '/' && substr($path, 0, 1) != '/') {
+                $host .= '/';
+            }
         }
 
         return $host . $path;
@@ -95,16 +95,14 @@ class Canonical
      */
     public function getHost($content, $conf)
     {
-        $this->conf = $this->conf ?
-            $this->conf :
-            $conf;
+        $this->conf = $this->conf ? $this->conf : $conf;
 
         if (isset($this->conf['host']) && !empty($this->conf['host'])) {
             $host = $this->conf['host'];
+        } elseif ($this->getTypoScriptFrontendController()->baseUrl != '') {
+            $host = $this->getTypoScriptFrontendController()->baseUrl;
         } else {
-            $host = $GLOBALS['TSFE']->baseUrl ?
-                $GLOBALS['TSFE']->baseUrl :
-                'http://' . $_SERVER['HTTP_HOST'];
+            $host = 'http://' . $_SERVER['HTTP_HOST'];
         }
 
         $content .= rtrim($host, '/') . '/';
@@ -119,16 +117,24 @@ class Canonical
      */
     protected function getPath()
     {
-        $result = $GLOBALS['TSFE']->page['tx_mfccanonical_canonical'];
+        $result = $this->getTypoScriptFrontendController()->page['tx_mfccanonical_canonical'];
 
         if (empty($result)) {
             /** @var $cObj \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer */
-            $cObj = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
-            $cObj->start($GLOBALS['TSFE']->page, 'pages');
+            $cObj = GeneralUtility::makeInstance(\TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer::class);
+            $cObj->start($this->getTypoScriptFrontendController()->page, 'pages');
+
             $result = $cObj->cObjGetSingle('TEXT', $this->conf['path.']);
         }
 
         return $result;
     }
 
+    /**
+     * @return \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
+     */
+    protected function getTypoScriptFrontendController()
+    {
+        return $GLOBALS['TSFE'];
+    }
 }

@@ -1,25 +1,20 @@
 <?php
 
 call_user_func(function () {
+    $ll = 'LLL:EXT:mfc_canonical/Resources/Private/Language/locallang_tca.xlf:';
 
-    $ll = 'LLL:EXT:mfc_canonical/Resources/Private/Language/locallang_tca.xml:';
-
-    $columns = array(
-        'tx_mfccanonical_canonical' => array(
+    $columns = [
+        'tx_mfccanonical_canonical' => [
             'exclude' => 1,
             'label' => $ll . 'pages.tx_mfccanonical_canonical',
-            'config' => array(
+            'config' => [
                 'type' => 'input',
                 'max' => 2000,
-            ),
-        ),
-    );
+            ],
+        ],
+    ];
 
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns(
-        'pages',
-        $columns,
-        false
-    );
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages', $columns);
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
         'pages',
@@ -27,5 +22,4 @@ call_user_func(function () {
         '--linebreak--, tx_mfccanonical_canonical',
         'after:subtitle'
     );
-
 });
