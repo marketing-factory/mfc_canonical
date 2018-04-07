@@ -20,6 +20,7 @@ namespace Mfc\MfcCanonical\User;
 
 use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 /**
  * Contoller for imports
@@ -43,6 +44,8 @@ class Canonical
      *
      * @param string $content
      * @param array $conf
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotException
+     * @throws \TYPO3\CMS\Extbase\SignalSlot\Exception\InvalidSlotReturnException
      */
     public function render($content, $conf)
     {
@@ -51,7 +54,13 @@ class Canonical
 
         $host = $this->getHost($content, $this->conf);
         if (!empty($host)) {
-            $this->pageRenderer->addMetaTag('<link rel="canonical" href="' . $this->getUrl($content, $conf) . '"/>');
+            $url = $this->getUrl($content, $conf);
+
+            /** @var Dispatcher $signalSlotDispatcher */
+            $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+            $signalSlotDispatcher->dispatch(Canonical::class, 'customizeUrl', [$content, $this->conf, $host, &$url]);
+
+            $this->pageRenderer->addMetaTag('<link rel="canonical" href="' . $url . '">');
         }
     }
 
